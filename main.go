@@ -95,6 +95,7 @@ func main() {
 
 
 	// Print the weather data
+	fmt.Printf("\n")
 	fmt.Printf("City: %s\n", weather.Name)
 	// Simulate a delay
 	time.Sleep(2 * time.Second)
@@ -104,6 +105,7 @@ func main() {
 	fmt.Printf("Pressure: %d hPa\n", weather.Main.Pressure)
 	// Simulate a delay
 	time.Sleep(2 * time.Second)
+	fmt.Printf("\n")
 	// Print a message to indicate that the data has been fetched
 	fmt.Println("Weather data fetched successfully!")
 	// Simulate a delay
