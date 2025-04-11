@@ -1,25 +1,57 @@
 package main
+
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"
+	"log"
 	"net/http"
-	"encoding/json"
+	"os"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 //weather struct format
+// Full structure matching the API response
 type Weather struct {
-	City string `json:"city"`
-	Temp float64 `json:"temp"`
-	Desc string `json:"desc"`
-	Humidity int    `json:"humidity"`
-	Pressure int    `json:"pressure"`
+	Name    string `json:"name"`
+	Main    struct {
+		Temp     float64 `json:"temp"`
+		Humidity int     `json:"humidity"`
+		Pressure int     `json:"pressure"`
+	} `json:"main"`
+	Weather []struct {
+		Description string `json:"description"`
+	} `json:"weather"`
+}
+
+// function to load environment variables
+func loadEnv() string {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	// Get the API key from environment variables
+	apiKey := os.Getenv("API_KEY") // Set your OpenWeatherMap API key here
+
+	// Check if the API key is set
+	if apiKey == "" {
+		log.Fatal("API key is not set. Please set the API key.")
+		os.Exit(1)
+	}
+	fmt.Println("API Key loaded successfully:")
+	return apiKey
 }
 
 
-const apiKey = "apiKey"
-func getweather() (Weather, error) {
+// city variable to store the user input
+var city string
+
+func getWeather() (Weather, error) {
+
+	apiKey := loadEnv()
 
 	// Weather data url
 	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric", city, apiKey)
@@ -49,14 +81,31 @@ func getweather() (Weather, error) {
 }
 
 func main() {
-	// Check if the API key is set
-	if apiKey == "" {
-		fmt.Println("API key is not set. Please set the API key.")
+
+	// Allow the user to input a city name
+	fmt.Print("Enter city name: ")
+	fmt.Scanln(&city)
+
+	// Fetch the weather data
+	weather, err := getWeather()
+	if err != nil {
+		fmt.Println("Error fetching weather data:", err)
 		os.Exit(1)
 	}
 
 
-
-	// Simulate fetching weather data
-	fmt.Println("Fetching weather data...")
+	// Print the weather data
+	fmt.Printf("City: %s\n", weather.Name)
+	// Simulate a delay
+	time.Sleep(2 * time.Second)
+	fmt.Printf("Temperature: %.2f°C\n", weather.Main.Temp)
+	fmt.Printf("Description: %s\n", weather.Weather[0].Description)
+	fmt.Printf("Humidity: %d%%\n", weather.Main.Humidity)
+	fmt.Printf("Pressure: %d hPa\n", weather.Main.Pressure)
+	// Simulate a delay
+	time.Sleep(2 * time.Second)
+	// Print a message to indicate that the data has been fetched
+	fmt.Println("Weather data fetched successfully!")
+	// Simulate a delay
+	time.Sleep(2 * time.Second)
 }
