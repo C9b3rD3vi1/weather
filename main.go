@@ -80,11 +80,18 @@ func getWeather() (Weather, error) {
 	return weather, nil
 }
 
+
+// main function to run the program
 func main() {
 
-	// Allow the user to input a city name
-	fmt.Print("Enter city name: ")
-	fmt.Scanln(&city)
+	// Allow the user to input a city name, multiple times until they enter "exit"
+	for {
+		fmt.Print("Enter city name (or type 'exit' to quit): ")
+		fmt.Scanln(&city)
+		if city == "exit" {
+			break
+		}
+		
 
 	// Fetch the weather data
 	weather, err := getWeather()
@@ -110,4 +117,5 @@ func main() {
 	fmt.Println("Weather data fetched successfully!")
 	// Simulate a delay
 	time.Sleep(2 * time.Second)
+}
 }
