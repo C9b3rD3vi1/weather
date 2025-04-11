@@ -117,5 +117,7 @@ func main() {
 	fmt.Println("Weather data fetched successfully!")
 	// Simulate a delay
 	time.Sleep(2 * time.Second)
+	fmt.Printf("\n")
+
 }
 }

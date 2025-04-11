@@ -3,3 +3,5 @@
 
 ## sample code image
 ![code sample](/weathercode.png)
+
+![code execution output](/ternimal.png)
