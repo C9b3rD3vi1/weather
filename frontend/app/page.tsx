@@ -53,8 +53,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-base-200 flex items-center justify-center px-4">
-      <div className="w-full max-w-md space-y-6 py-10">
+    <main className="min-h-screen bg-base-200 flex items-center justify-center">
+      <div className="w-full max-w-md px-4 py-8 flex flex-col items-center justify-center space-y-6">
         {/* Header */}
         <div className="text-center">
           <h1 className="text-4xl font-bold text-primary mb-1">
@@ -66,7 +66,7 @@ export default function Home() {
         </div>
 
         {/* Input Card */}
-        <div className="card bg-base-100 shadow-xl p-6 space-y-4 relative">
+        <div className="card bg-base-100 shadow-xl p-6 space-y-4 relative w-full">
           <input
             type="text"
             placeholder="Enter city"
@@ -95,7 +95,7 @@ export default function Home() {
 
           <button
             onClick={handleSearch}
-            className={`btn btn-primary w-full`}
+            className="btn btn-primary w-full"
             disabled={loading}
           >
             {loading && <span className="loading loading-spinner mr-2"></span>}
@@ -105,7 +105,7 @@ export default function Home() {
 
         {/* Weather Display */}
         {weather && (
-          <div className="card bg-base-100 shadow-lg p-6 animate-fadeIn">
+          <div className="card bg-base-100 shadow-lg p-6 w-full animate-fadeIn">
             <h2 className="card-title text-2xl text-center mb-4">
               {weather.name}
             </h2>
@@ -116,7 +116,7 @@ export default function Home() {
                 className="w-20 h-20"
               />
             </div>
-            <div className="space-y-2 text-base">
+            <div className="space-y-2 text-base text-left">
               <p>
                 <strong>🌡️ Temperature:</strong> {weather.main.temp} °C
               </p>
