@@ -2,4 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "rippleui/dist/rippleui.css";
+html,
+body {
+  @apply font-sans;
+}
