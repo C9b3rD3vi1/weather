@@ -23,5 +23,4 @@ const config: Config & { daisyui: { themes: string[] } } = {
     ],
   },
 };
-
 export default config;
