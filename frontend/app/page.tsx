@@ -53,20 +53,20 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-base-200 flex items-center justify-center">
-      <div className="w-full max-w-md px-4 py-8 flex flex-col items-center justify-center space-y-6">
+    <main className="min-h-screen bg-base-200 flex items-center justify-center px-4">
+      <div className="w-full max-w-md space-y-6">
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-primary mb-1">
+        <div className="text-center mb-6">
+          <h1 className="text-4xl font-bold text-primary mb-2">
             C9b3rD3vi1 Weatherly ☀️
           </h1>
-          <p className="text-base text-base-content/70">
+          <p className="text-sm text-base-content/70">
             Real-time weather for any city.
           </p>
         </div>
 
         {/* Input Card */}
-        <div className="card bg-base-100 shadow-xl p-6 space-y-4 relative w-full">
+        <div className="card bg-base-100 shadow-xl p-6 space-y-4 relative">
           <input
             type="text"
             placeholder="Enter city"
@@ -95,8 +95,7 @@ export default function Home() {
 
           <button
             onClick={handleSearch}
-            className="btn btn-primary w-full"
-            disabled={loading}
+            className={`btn btn-primary w-full ${loading ? 'btn-disabled' : ''}`}
           >
             {loading && <span className="loading loading-spinner mr-2"></span>}
             {loading ? 'Loading...' : 'Get Weather'}
@@ -105,10 +104,8 @@ export default function Home() {
 
         {/* Weather Display */}
         {weather && (
-          <div className="card bg-base-100 shadow-lg p-6 w-full animate-fadeIn">
-            <h2 className="card-title text-2xl text-center mb-4">
-              {weather.name}
-            </h2>
+          <div className="card bg-base-100 shadow-lg p-6 animate-fadeIn">
+            <h2 className="card-title text-2xl text-center mb-4">{weather.name}</h2>
             <div className="flex items-center justify-center mb-4">
               <img
                 src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
@@ -116,7 +113,7 @@ export default function Home() {
                 className="w-20 h-20"
               />
             </div>
-            <div className="space-y-2 text-base text-left">
+            <div className="space-y-2 text-base">
               <p>
                 <strong>🌡️ Temperature:</strong> {weather.main.temp} °C
               </p>

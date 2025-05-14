@@ -5,4 +5,9 @@
 html,
 body {
   @apply font-sans;
+  @apply bg-base-100;
+  @apply text-base-content;
+  @apply scroll-smooth;
+  height: 100%;
+  margin: 0;
 }
