@@ -1,59 +1,60 @@
 'use client';
 
 import { useState } from "react";
-import WeatherForm from "@/components/WeatherForm";
-import WeatherCard from "@/components/WeatherCard";
+import { Input, Button } from "rippleui";  // Import from @rippleui/react package
+import { getWeather } from "@/services/getWeather";
 
-type WeatherData = {
-  city: string;
-  temperature: number;
-  description: string;
-  icon: string;
-  humidity?: number;
-  wind?: number;
-};
+interface WeatherData {
+  name: string;
+  main: {
+    temp: number;
+    humidity: number;
+    pressure: number;
+  };
+  weather: Array<{
+    description: string;
+  }>;
+}
 
-export default function HomePage() {
+export default function Home() {
+  const [city, setCity] = useState("");
   const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const fetchWeather = async (city: string) => {
-    setLoading(true);
-    setError("");
-    setWeather(null);
-
+  const handleSearch = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/api/weather?city=${city}`);
-      if (!res.ok) throw new Error("City not found");
-      const data = await res.json();
-
-      setWeather({
-        city: data.city,
-        temperature: data.temp,
-        description: data.description,
-        icon: data.icon,
-        humidity: data.humidity,
-        wind: data.wind,
-      });
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
-    } finally {
-      setLoading(false);
+      const data = await getWeather(city);
+      setWeather(data);
+    } catch (error) {
+      console.error('Weather fetch error:', error);
+      alert("Error fetching weather");
     }
   };
 
   return (
-    <main className="min-h-screen bg-base-100 flex flex-col items-center justify-center px-4 py-8">
-      <h1 className="text-4xl font-bold mb-4 text-primary">☀️ Weatherly</h1>
-      <p className="text-md text-muted mb-6">Enter a city to get current weather</p>
+    <div className="p-6 max-w-md mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Weather App</h1>
+      <Input
+        placeholder="Enter city"
+        value={city}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)}
+        className="mb-4"
+      />
+      <button
+        onClick={handleSearch}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        Get Weather
+      </button>
 
-      <div className="w-full max-w-md space-y-4">
-        <WeatherForm onSearch={fetchWeather} />
-        {loading && <p className="text-center text-accent">Loading...</p>}
-        {error && <p className="text-center text-error">{error}</p>}
-        {weather && <WeatherCard weather={weather} />}
-      </div>
-    </main>
+      {weather && (
+        <div className="mt-6 bg-white p-4 rounded shadow">
+          <p><strong>City:</strong> {weather.name}</p>
+          <p><strong>Temperature:</strong> {weather.main.temp} °C</p>
+          <p><strong>Description:</strong> {weather.weather[0].description}</p>
+          <p><strong>Humidity:</strong> {weather.main.humidity}%</p>
+          <p><strong>Pressure:</strong> {weather.main.pressure} hPa</p>
+        </div>
+      )}
+    </div>
   );
 }

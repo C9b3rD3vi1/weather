@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"time"
+	//"time"
 
 	"github.com/joho/godotenv"
 )
@@ -82,6 +82,7 @@ func getWeather() (Weather, error) {
 
 
 // main function to run the program
+/*
 func main() {
 
 	// Allow the user to input a city name, multiple times until they enter "exit"
@@ -120,4 +121,30 @@ func main() {
 	fmt.Printf("\n")
 
 }
+}*/
+
+func main() {
+	http.HandleFunc("/api/weather", func(w http.ResponseWriter, r *http.Request) {
+		// CORS headers
+		w.Header().Set("Access-Control-Allow-Origin", "*") // Allow all origins
+		w.Header().Set("Content-Type", "application/json")
+
+		// Get city from query param
+		city = r.URL.Query().Get("city")
+		if city == "" {
+			http.Error(w, "City parameter is required", http.StatusBadRequest)
+			return
+		}
+
+		weather, err := getWeather()
+		if err != nil {
+			http.Error(w, "Error fetching weather", http.StatusInternalServerError)
+			return
+		}
+
+		json.NewEncoder(w).Encode(weather)
+	})
+
+	fmt.Println("Server running on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
