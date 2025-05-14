@@ -140,24 +140,24 @@ Theme Toggle: Switch between light and dark mode using the theme toggle button.
 
 Project Structure
 
-/weatherly
-├── /backend
-│   ├── main.go                # Go server and API logic
-│   ├── .env                   # Environment variables (OpenWeatherMap API key)
-│   └── go.mod                 # Go module dependencies
-│
-├── /frontend
-│   ├── /public                # Public assets (e.g., index.html)
-│   ├── /src
-│   │   ├── /components        # Reusable UI components (WeatherCard, etc.)
-│   │   ├── /services          # API calls and weather logic
-│   │   ├── App.tsx            # Main app component
-│   │   ├── index.tsx          # React entry point
-│   ├── package.json           # React project metadata and dependencies
-│   └── .env                   # Environment variables (Backend API URL)
-│
-├── README.md                  # This file
-└── LICENSE                    # Project license (MIT or other)
+    /weatherly
+    ├── /backend
+    │   ├── main.go                # Go server and API logic
+    │   ├── .env                   # Environment variables (OpenWeatherMap API key)
+    │   └── go.mod                 # Go module dependencies
+    │
+    ├── /frontend
+    │   ├── /public                # Public assets (e.g., index.html)
+    │   ├── /src
+    │   │   ├── /components        # Reusable UI components (WeatherCard, etc.)
+    │   │   ├── /services          # API calls and weather logic
+    │   │   ├── App.tsx            # Main app component
+    │   │   ├── index.tsx          # React entry point
+    │   ├── package.json           # React project metadata and dependencies
+    │   └── .env                   # Environment variables (Backend API URL)
+    │
+    ├── README.md                  # This file
+    └── LICENSE                    # Project license (MIT or other)
 
 /backend
 Contains all Go-related code, including the server (main.go) and environment configurations. It listens for weather requests and fetches data from OpenWeatherMap.
