@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 type WeatherData = {
   city: string;
   temperature: number;
@@ -11,14 +13,14 @@ export default function WeatherCard({ weather }: { weather: WeatherData }) {
   return (
     <div className="card bg-base-200 shadow-md p-6 rounded-lg">
       <div className="flex items-center justify-between mb-4">
-        <div>
-          <h2 className="text-2xl font-bold text-primary">{weather.city}</h2>
-          <p className="text-sm text-muted capitalize">{weather.description}</p>
-        </div>
-        
-        <img
+      <div>
+        <h2 className="text-2xl font-bold text-primary">{weather.city}</h2>
+        <p className="text-sm text-muted capitalize">{weather.description}</p>
+        <Image
           src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
           alt={weather.description}
+          width={80}
+          height={80}
           className="w-16 h-16 sm:w-20 sm:h-20"
         />
       </div>
@@ -42,6 +44,7 @@ export default function WeatherCard({ weather }: { weather: WeatherData }) {
             <p className="font-semibold">{weather.wind} m/s</p>
           </div>
         )}
+      </div>
       </div>
     </div>
   );
