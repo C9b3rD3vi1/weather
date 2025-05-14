@@ -1,15 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-import rippleui from 'rippleui';
+import daisyui from "daisyui";
 
-module.exports = {
+export default {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@RippleUI/**/*.{js,ts,jsx,tsx}"
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {},
   },
-  plugins: [rippleui],
+  plugins: [daisyui],
 };
