@@ -64,7 +64,7 @@ To run the Go backend, you need to have Go installed on your machine. If Go is n
 2. Install dependencies
 Go does not have a package manager, so you can install the required libraries using go get if needed. Assuming you are using gin-gonic for handling HTTP requests, install it:
 
-    go get github.com/gin-gonic/gin
+        go get github.com/gin-gonic/gin
 
 3. Create a .env file for your OpenWeatherMap API key
 
@@ -92,7 +92,7 @@ If you don’t have Node.js installed, follow the instructions here.
 2. Install dependencies
 In the frontend folder, install the necessary dependencies by running:
 
-    npm install
+        npm install
 
 or if you use Yarn:
 
@@ -102,7 +102,7 @@ or if you use Yarn:
 
 In the frontend, ensure the API URL is pointing to your Go backend. Create a .env file in the frontend folder and add the backend API URL:
 
-REACT_APP_BACKEND_API_URL=http://localhost:8080
+    REACT_APP_BACKEND_API_URL=http://localhost:8080
 
 4. Running the Frontend
 
@@ -187,7 +187,7 @@ Create a pull request with a detailed explanation of your changes.
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Acknowledgments
+### Acknowledgments
 OpenWeatherMap: For providing free weather data APIs.
 
 Tailwind CSS: For utility-first CSS framework.
